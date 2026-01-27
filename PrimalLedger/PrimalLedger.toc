@@ -1,0 +1,12 @@
+## Interface: 20504
+## Title: Primal Ledger
+## Notes: Track Tailoring and Alchemy cooldowns across all characters
+## Author:
+## Version: 1.0.0
+## SavedVariables: PrimalLedgerDB
+
+Core.lua
+Data.lua
+Cooldowns.lua
+MinimapButton.lua
+UI.lua
