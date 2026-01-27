@@ -13,7 +13,7 @@ function PL:CreateMinimapButton()
     button:SetFrameLevel(8)
 
     -- Button textures
-    button:SetNormalTexture("Interface\\Icons\\INV_Fabric_Netherweave_Bolt")
+    button:SetNormalTexture("Interface\\AddOns\\PrimalLedger\\assets\\icon_map")
     button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
     -- Border overlay

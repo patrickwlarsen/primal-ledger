@@ -115,29 +115,26 @@ function PL:DetectProfessions(charKey)
     self:DetectKnownCrafts(charKey)
 end
 
--- Detect which cooldown crafts the current character knows
+-- Detect which cooldown crafts the current character knows (without wiping existing data)
 function PL:DetectKnownCrafts(charKey)
     local charData = self.db.characters[charKey]
     if not charData then return end
 
-    -- Completely wipe existing data for this character's crafts
-    charData.knownCrafts = {}
-    charData.cooldowns = {}
+    -- Initialize tables if they don't exist (but don't wipe existing data)
+    charData.knownCrafts = charData.knownCrafts or {}
+    charData.cooldowns = charData.cooldowns or {}
 
     -- Use IsSpellKnown to detect which crafts the character knows
+    -- Only ADD data here, don't remove - removal happens when scanning tradeskill window
     for cdType, spellID in pairs(self.COOLDOWN_SPELLS) do
         if IsSpellKnown(spellID) then
             charData.knownCrafts[cdType] = true
-            -- Default to unknown cooldown state (will be updated when tradeskill window opens)
-            -- Keep existing cooldown data if we have it
         end
     end
-
-    -- Scan the tradeskill window for cooldown data (if open)
-    self:ScanTradeSkillWindow(charKey)
 end
 
 -- Scan the tradeskill window for cooldown data
+-- This wipes and re-fetches data for the currently open profession only
 function PL:ScanTradeSkillWindow(charKey)
     local charData = self.db.characters[charKey]
     if not charData then return end
@@ -145,6 +142,29 @@ function PL:ScanTradeSkillWindow(charKey)
     local numSkills = GetNumTradeSkills()
     if not numSkills or numSkills == 0 then return end
 
+    -- Detect which profession is open
+    local tradeskillName = GetTradeSkillLine()
+    if not tradeskillName then return end
+
+    local professionKey = nil
+    if tradeskillName == "Alchemy" then
+        professionKey = "alchemy"
+    elseif tradeskillName == "Tailoring" then
+        professionKey = "tailoring"
+    else
+        return -- Not a profession we track
+    end
+
+    -- Wipe existing data for this profession's crafts
+    local professionCooldowns = self.PROFESSION_COOLDOWNS[professionKey]
+    if professionCooldowns then
+        for _, cdType in ipairs(professionCooldowns) do
+            charData.knownCrafts[cdType] = nil
+            charData.cooldowns[cdType] = nil
+        end
+    end
+
+    -- Re-fetch known crafts and cooldowns from the tradeskill window
     for i = 1, numSkills do
         local name, skillType = GetTradeSkillInfo(i)
         if name and skillType ~= "header" then

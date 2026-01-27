@@ -276,7 +276,7 @@ function PL:ToggleMainFrame()
     if self.mainFrame:IsShown() then
         self.mainFrame:Hide()
     else
-        -- Refresh current character's known crafts and cooldown data before showing
+        -- Refresh current character's known crafts
         local charKey = self:GetCharacterKey()
         self:DetectKnownCrafts(charKey)
 
