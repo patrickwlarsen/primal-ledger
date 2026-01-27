@@ -10,7 +10,7 @@ PL.COOLDOWNS = {
     [36686] = { name = "Shadowcloth", type = "shadowcloth", duration = 345600 },
     [26751] = { name = "Primal Mooncloth", type = "primalMooncloth", duration = 345600 },
     [31373] = { name = "Spellcloth", type = "spellcloth", duration = 345600 },
-    [18560] = { name = "Mooncloth", type = "mooncloth", duration = 345600 }, -- 4 days
+    [18560] = { name = "Mooncloth", type = "mooncloth", duration = 0 }, -- No cooldown in TBC Anniversary
 
     -- Alchemy cooldowns
     [29688] = { name = "Transmute: Primal Might", type = "primalMight", duration = 72000 },           -- 20 hours
@@ -61,7 +61,7 @@ PL.COOLDOWN_DURATIONS = {
     shadowcloth = 345600,
     primalMooncloth = 345600,
     spellcloth = 345600,
-    mooncloth = 345600,
+    mooncloth = 0, -- No cooldown in TBC Anniversary
     primalMight = 72000,
     transmuteArcanite = 0, -- No cooldown in TBC Anniversary
     transmuteUndeathToWater = 86400,

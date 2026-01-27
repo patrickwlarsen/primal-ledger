@@ -18,7 +18,7 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 | Shadowcloth | 4 days |
 | Spellcloth | 4 days |
 | Primal Mooncloth | 4 days |
-| Mooncloth | 4 days |
+| Mooncloth | No cooldown |
 
 ### Alchemy
 | Craft | Cooldown |
