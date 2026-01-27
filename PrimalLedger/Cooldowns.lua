@@ -316,6 +316,22 @@ function PL:OpenCraftingSpell(cdType)
     CastSpellByName(professionSpell)
 end
 
+-- Select a recipe in an already-open tradeskill window (right-click action)
+function PL:SelectCraftingSpell(cdType)
+    local spellName = self.COOLDOWN_NAMES[cdType]
+    if not spellName then return end
+
+    -- Check if tradeskill window is open
+    local numSkills = GetNumTradeSkills()
+    if not numSkills or numSkills == 0 then
+        self:Print("Open your profession window first!")
+        return
+    end
+
+    -- Select the recipe
+    self:SelectTradeSkillByName(spellName)
+end
+
 -- Find and select a recipe by name in the tradeskill window
 function PL:SelectTradeSkillByName(spellName)
     local numSkills = GetNumTradeSkills()

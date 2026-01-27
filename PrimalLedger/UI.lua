@@ -123,6 +123,7 @@ local function CreateRow(parent, index)
     row.timeBtn = CreateFrame("Button", nil, row)
     row.timeBtn:SetPoint("RIGHT", row, "RIGHT", 0, 0)
     row.timeBtn:SetHeight(ROW_HEIGHT)
+    row.timeBtn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 
     row.time = row.timeBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     row.time:SetPoint("RIGHT", row.timeBtn, "RIGHT", 0, 0)
@@ -133,7 +134,9 @@ local function CreateRow(parent, index)
         if self.isClickable then
             row.time:SetTextColor(0.5, 1, 0.5) -- Lighter green on hover
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:AddLine("Click to open crafting window")
+            GameTooltip:AddLine("Ready to craft!")
+            GameTooltip:AddLine("|cffffffffLeft-click:|r Open profession window", 0.8, 0.8, 0.8)
+            GameTooltip:AddLine("|cffffffffRight-click:|r Select recipe", 0.8, 0.8, 0.8)
             GameTooltip:Show()
         end
     end)
@@ -221,8 +224,12 @@ function PL:UpdateMainFrame()
                     if isCurrentChar then
                         cdRow.timeBtn.isClickable = true
                         local cdType = cd.type
-                        cdRow.timeBtn:SetScript("OnClick", function()
-                            PL:OpenCraftingSpell(cdType)
+                        cdRow.timeBtn:SetScript("OnClick", function(self, button)
+                            if button == "LeftButton" then
+                                PL:OpenCraftingSpell(cdType)
+                            elseif button == "RightButton" then
+                                PL:SelectCraftingSpell(cdType)
+                            end
                         end)
                     else
                         cdRow.timeBtn.isClickable = false
