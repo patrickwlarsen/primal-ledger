@@ -3,6 +3,8 @@
   "version": "1.0.1",
   "description": "WoW addon for tracking profession cooldowns",
   "scripts": {
+    "build": "node build.js --silent",
+    "build:verbose": "node build.js",
     "deploy": "node deploy.js --silent",
     "deploy:verbose": "node deploy.js"
   },
