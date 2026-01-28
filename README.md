@@ -55,3 +55,31 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 | `/primalledger` | Toggle the cooldown window |
 | `/pl reset` | Reset all tracked data |
 | `/pl remove` | Remove current character from tracking |
+
+## Development
+
+### Deploy Script
+
+A deploy script is included to quickly copy the addon to your WoW AddOns folder during development.
+
+**Setup:**
+
+1. Copy `config.example.json` to `config.json`
+2. Update `addonInstallPath` with your WoW AddOns folder path
+
+**Usage:**
+
+```bash
+# Verbose output
+npm run deploy:verbose
+
+# Silent mode
+npm run deploy
+```
+
+Or run directly with Node:
+
+```bash
+node deploy.js          # verbose
+node deploy.js --silent # silent
+```
