@@ -57,6 +57,7 @@ function PL:CreateMainFrame()
     -- Main frame
     local frame = CreateFrame("Frame", "PrimalLedgerFrame", UIParent, "BackdropTemplate")
     frame:SetSize(initialWidth, initialHeight)
+    tinsert(UISpecialFrames, "PrimalLedgerFrame") -- Close on ESC
     frame:SetPoint("CENTER")
     frame:SetMovable(true)
     frame:SetResizable(true)

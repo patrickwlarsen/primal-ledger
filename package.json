@@ -1,6 +1,6 @@
 {
   "name": "primal-ledger",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "WoW addon for tracking profession cooldowns",
   "scripts": {
     "build": "node build.js --silent",

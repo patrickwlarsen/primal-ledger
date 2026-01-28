@@ -1,0 +1,5 @@
+<Bindings>
+    <Binding category="BINDING_HEADER_PRIMALLEDGER" name="Toggle Window">
+        PrimalLedger:ToggleMainFrame()
+    </Binding>
+</Bindings>

@@ -7,6 +7,8 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 - **Account-wide tracking** - Track cooldowns across all your characters
 - **Auto-detection** - Automatically detects professions and known crafts
 - **Minimap button** - Click to toggle the cooldown window
+- **Keybinding support** - Set a custom keybind in Key Bindings > AddOns > Primal Ledger
+- **ESC to close** - Press Escape to close the window
 - **Click to craft** - Left-click "Ready!" to open profession window, right-click to select recipe
 - **Current character first** - Your logged-in character always appears at the top of the list
 - **Per-profession sync** - Opening a profession window refreshes cooldown data for that profession only
@@ -14,6 +16,7 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 ## Tracked Cooldowns
 
 ### Tailoring
+
 | Craft | Cooldown |
 |-------|----------|
 | Shadowcloth | 4 days |
@@ -22,27 +25,30 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 | Mooncloth | No cooldown |
 
 ### Alchemy
+
 | Craft | Cooldown |
 |-------|----------|
 | Transmute: Primal Might | 20 hours |
-| Transmute: Arcanite | No cooldown |
+| Transmute: Arcanite | 48 hours |
 | Transmute: Undeath to Water | 24 hours |
 | Transmute: Mithril to Truesilver | 20 hours |
 | Transmute: Iron to Gold | 20 hours |
 
 ## Installation
 
-1. Download or clone this repository
-2. Copy the `PrimalLedger` folder to your WoW AddOns directory:
+1. Download the latest release from the [Releases](https://github.com/patrickwlarsen/primal-ledger/releases) page
+2. Extract the `PrimalLedger` folder to your WoW AddOns directory:
    ```
-   World of Warcraft/_classic_/Interface/AddOns/PrimalLedger/
+   World of Warcraft/_anniversary_/Interface/AddOns/
    ```
 3. Restart WoW or type `/reload`
 
 ## Usage
 
-- **Open the window**: Click the minimap button or type `/pl`
-- **Update cooldowns**: Open your profession window (Alchemy/Tailoring) to sync cooldown data for that profession
+- **Open the window**: Click the minimap button, type `/pl`, or use your keybind
+- **Set a keybind**: ESC > Key Bindings > AddOns > Primal Ledger
+- **Close the window**: Click the X button, press Escape, or use your keybind
+- **Update cooldowns**: Open your profession window (Alchemy/Tailoring) to sync cooldown data
 - **Quick craft**:
   - **Left-click** "Ready!" to open the profession window and select the recipe
   - **Right-click** "Ready!" to select the recipe in an already-open profession window
@@ -58,28 +64,35 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 
 ## Development
 
-### Deploy Script
-
-A deploy script is included to quickly copy the addon to your WoW AddOns folder during development.
-
-**Setup:**
-
-1. Copy `config.example.json` to `config.json`
-2. Update `addonInstallPath` with your WoW AddOns folder path
-
-**Usage:**
+### Setup
 
 ```bash
-# Verbose output
-npm run deploy:verbose
-
-# Silent mode
-npm run deploy
+npm install
+cp config.example.json config.json
 ```
 
-Or run directly with Node:
+Edit `config.json` with your WoW AddOns folder path.
+
+### Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run deploy` | Deploy addon to WoW folder (silent) |
+| `npm run deploy:verbose` | Deploy addon with output |
+| `npm run build` | Create release zip (silent) |
+| `npm run build:verbose` | Create release zip with output |
+
+### Manual Commands
 
 ```bash
-node deploy.js          # verbose
-node deploy.js --silent # silent
+node deploy.js          # deploy (verbose)
+node deploy.js --silent # deploy (silent)
+node build.js           # build (verbose)
+node build.js --silent  # build (silent)
 ```
+
+Release zips are saved to the `releases/` folder.
+
+## License
+
+MIT
