@@ -1,0 +1,14 @@
+# User-specific config
+config.json
+
+# Node
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo

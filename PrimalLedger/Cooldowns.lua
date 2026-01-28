@@ -21,8 +21,29 @@ PL.COOLDOWNS = {
 }
 
 -- Profession names for detection
+-- Primary professions
 local TAILORING = "Tailoring"
 local ALCHEMY = "Alchemy"
+local ENCHANTING = "Enchanting"
+local LEATHERWORKING = "Leatherworking"
+local BLACKSMITHING = "Blacksmithing"
+local JEWELCRAFTING = "Jewelcrafting"
+local ENGINEERING = "Engineering"
+local MINING = "Mining"
+local HERBALISM = "Herbalism"
+local SKINNING = "Skinning"
+-- Secondary professions
+local COOKING = "Cooking"
+local FISHING = "Fishing"
+local FIRST_AID = "First Aid"
+
+-- Helper to check if a profession is known (handles both boolean and number values)
+local function hasProfession(value)
+    if type(value) == "number" then
+        return value > 0
+    end
+    return value == true
+end
 
 -- Cooldown types by profession
 PL.PROFESSION_COOLDOWNS = {
@@ -94,19 +115,56 @@ function PL:DetectProfessions(charKey)
     if not charData then return end
 
     charData.professions = {
+        -- Primary professions (stores skill level or false)
         tailoring = false,
-        alchemy = false
+        alchemy = false,
+        enchanting = false,
+        leatherworking = false,
+        blacksmithing = false,
+        jewelcrafting = false,
+        engineering = false,
+        mining = false,
+        herbalism = false,
+        skinning = false,
+        -- Secondary professions
+        cooking = false,
+        fishing = false,
+        firstAid = false
     }
 
     -- TBC Classic uses the skill system for professions
     local numSkills = GetNumSkillLines()
     for i = 1, numSkills do
-        local skillName, isHeader = GetSkillLineInfo(i)
+        local skillName, isHeader, _, skillRank = GetSkillLineInfo(i)
         if not isHeader and skillName then
+            -- Primary professions
             if skillName == TAILORING then
-                charData.professions.tailoring = true
+                charData.professions.tailoring = skillRank
             elseif skillName == ALCHEMY then
-                charData.professions.alchemy = true
+                charData.professions.alchemy = skillRank
+            elseif skillName == ENCHANTING then
+                charData.professions.enchanting = skillRank
+            elseif skillName == LEATHERWORKING then
+                charData.professions.leatherworking = skillRank
+            elseif skillName == BLACKSMITHING then
+                charData.professions.blacksmithing = skillRank
+            elseif skillName == JEWELCRAFTING then
+                charData.professions.jewelcrafting = skillRank
+            elseif skillName == ENGINEERING then
+                charData.professions.engineering = skillRank
+            elseif skillName == MINING then
+                charData.professions.mining = skillRank
+            elseif skillName == HERBALISM then
+                charData.professions.herbalism = skillRank
+            elseif skillName == SKINNING then
+                charData.professions.skinning = skillRank
+            -- Secondary professions
+            elseif skillName == COOKING then
+                charData.professions.cooking = skillRank
+            elseif skillName == FISHING then
+                charData.professions.fishing = skillRank
+            elseif skillName == FIRST_AID then
+                charData.professions.firstAid = skillRank
             end
         end
     end
@@ -258,7 +316,7 @@ function PL:GetCharacterCooldowns(charKey)
     local knownCrafts = charData.knownCrafts or {}
 
     -- Check tailoring cooldowns
-    if charData.professions.tailoring then
+    if hasProfession(charData.professions.tailoring) then
         for _, cdType in ipairs(self.PROFESSION_COOLDOWNS.tailoring) do
             if knownCrafts[cdType] then
                 local remaining = self:GetCooldownRemaining(charKey, cdType)
@@ -273,7 +331,7 @@ function PL:GetCharacterCooldowns(charKey)
     end
 
     -- Check alchemy cooldowns
-    if charData.professions.alchemy then
+    if hasProfession(charData.professions.alchemy) then
         for _, cdType in ipairs(self.PROFESSION_COOLDOWNS.alchemy) do
             if knownCrafts[cdType] then
                 local remaining = self:GetCooldownRemaining(charKey, cdType)
@@ -295,7 +353,7 @@ function PL:HasRelevantProfessions(charKey)
     local charData = self.db.characters[charKey]
     if not charData or not charData.professions then return false end
 
-    return charData.professions.tailoring or charData.professions.alchemy
+    return hasProfession(charData.professions.tailoring) or hasProfession(charData.professions.alchemy)
 end
 
 -- Open profession window and select a specific recipe

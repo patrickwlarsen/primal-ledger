@@ -13,7 +13,12 @@ function PL:CreateMinimapButton()
     button:SetFrameLevel(8)
 
     -- Button textures
-    button:SetNormalTexture("Interface\\AddOns\\PrimalLedger\\assets\\icon_map")
+    local icon = button:CreateTexture(nil, "BACKGROUND")
+    icon:SetSize(20, 20)
+    icon:SetPoint("CENTER", 0, 0)
+    icon:SetTexture("Interface\\AddOns\\PrimalLedger\\assets\\icon_map")
+    icon:SetMask("Interface\\CharacterFrame\\TempPortraitAlphaMask")
+
     button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
     -- Border overlay
