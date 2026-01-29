@@ -12,6 +12,7 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 - **Click to craft** - Left-click "Ready!" to open profession window, right-click to select recipe
 - **Current character first** - Your logged-in character always appears at the top of the list
 - **Per-profession sync** - Opening a profession window refreshes cooldown data for that profession only
+- **Sources tab** - View pattern sources with clickable item links, vendor targeting, and TomTom waypoints
 
 ## Tracked Cooldowns
 
@@ -19,9 +20,9 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 
 | Craft | Cooldown |
 |-------|----------|
-| Shadowcloth | 4 days |
-| Spellcloth | 4 days |
-| Primal Mooncloth | 4 days |
+| Shadowcloth | 92 hours |
+| Spellcloth | 92 hours |
+| Primal Mooncloth | 92 hours |
 | Mooncloth | No cooldown |
 
 ### Alchemy
@@ -52,6 +53,11 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy and Tailoring cool
 - **Quick craft**:
   - **Left-click** "Ready!" to open the profession window and select the recipe
   - **Right-click** "Ready!" to select the recipe in an already-open profession window
+- **Sources tab**:
+  - View where to obtain patterns for tailoring cooldown crafts
+  - **Shift-click** item links to paste them in chat
+  - **Click vendor name** to target the NPC
+  - **Click TomTom** to set a waypoint (requires TomTom addon)
 
 ## Slash Commands
 

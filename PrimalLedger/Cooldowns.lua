@@ -6,10 +6,10 @@ local addonName, PL = ...
 -- Cooldown definitions
 -- Format: spellID = { name, cooldownType, duration (seconds) }
 PL.COOLDOWNS = {
-    -- Tailoring cooldowns (4 days = 345600 seconds)
-    [36686] = { name = "Shadowcloth", type = "shadowcloth", duration = 345600 },
-    [26751] = { name = "Primal Mooncloth", type = "primalMooncloth", duration = 345600 },
-    [31373] = { name = "Spellcloth", type = "spellcloth", duration = 345600 },
+    -- Tailoring cooldowns (92 hours = 331200 seconds)
+    [36686] = { name = "Shadowcloth", type = "shadowcloth", duration = 331200 },
+    [26751] = { name = "Primal Mooncloth", type = "primalMooncloth", duration = 331200 },
+    [31373] = { name = "Spellcloth", type = "spellcloth", duration = 331200 },
     [18560] = { name = "Mooncloth", type = "mooncloth", duration = 0 }, -- No cooldown in TBC Anniversary
 
     -- Alchemy cooldowns
@@ -79,15 +79,38 @@ PL.COOLDOWN_SPELLS = {
 
 -- Cooldown durations
 PL.COOLDOWN_DURATIONS = {
-    shadowcloth = 345600,
-    primalMooncloth = 345600,
-    spellcloth = 345600,
+    shadowcloth = 331200, -- 92 hours
+    primalMooncloth = 331200, -- 92 hours
+    spellcloth = 331200, -- 92 hours
     mooncloth = 0, -- No cooldown in TBC Anniversary
     primalMight = 72000,
     transmuteArcanite = 0, -- No cooldown in TBC Anniversary
     transmuteUndeathToWater = 86400,
     transmuteMithrilToTruesilver = 72000,
     transmuteIronToGold = 72000
+}
+
+-- Source information for cooldown crafts
+-- Format: cooldownType = { spellId, skillRequired, pattern = { itemId, name }, vendor = { npcId, name, tomtom } }
+PL.COOLDOWN_SOURCES = {
+    primalMooncloth = {
+        spellId = 26751,
+        skillRequired = 350,
+        pattern = { itemId = 21895, name = "Pattern: Primal Mooncloth" },
+        vendor = { npcId = 22208, name = "Nasmara Moonsong", tomtom = "/way #1955 66.6 68.8 Nasmara Moonsong" }
+    },
+    shadowcloth = {
+        spellId = 36686,
+        skillRequired = 350,
+        pattern = { itemId = 30483, name = "Pattern: Shadowcloth" },
+        vendor = { npcId = 22212, name = "Andrion Darkspinner", tomtom = "/way #1955 66.6 68.2 Andrion Darkspinner" }
+    },
+    spellcloth = {
+        spellId = 31373,
+        skillRequired = 350,
+        pattern = { itemId = 24316, name = "Pattern: Spellcloth" },
+        vendor = { npcId = 22213, name = "Gidge Spellweaver", tomtom = "/way #1955 66.6 68.6 Gidge Spellweaver" }
+    }
 }
 
 -- Profession spell names (for opening the tradeskill window)

@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.2.0
+
+### New Features
+- **Sources Tab** - New tab showing where to obtain patterns for tailoring cooldown crafts
+  - Clickable item links for patterns (hover to preview, shift-click to link in chat)
+  - Clickable vendor names to target NPCs
+  - TomTom waypoint integration (click to set waypoint)
+
+### Improvements
+- Updated tailoring cooldown durations to 92 hours (was incorrectly set to 96 hours)
+
+### Data Added
+- Pattern source information for Primal Mooncloth, Shadowcloth, and Spellcloth
+- Vendor NPC data with TomTom coordinates for Shattrath City
+
+---
+
 ## v1.1.0
 
 ### New Features

@@ -7,7 +7,7 @@ local addonName, PL = ...
 BINDING_HEADER_PRIMALLEDGER = "Primal Ledger"
 
 -- Addon namespace
-PL.version = "1.1.0"
+PL.version = "1.2.0"
 PL.addonLoaded = false
 PL.playerLoggedIn = false
 
