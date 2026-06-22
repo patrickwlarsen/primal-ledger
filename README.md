@@ -1,6 +1,6 @@
 # Primal Ledger
 
-A World of Warcraft TBC Anniversary addon that tracks Alchemy, Tailoring, Leatherworking, and Enchanting cooldowns across all your characters.
+A World of Warcraft TBC Anniversary addon that tracks Alchemy, Tailoring, Leatherworking, Enchanting, and Jewelcrafting cooldowns across all your characters.
 
 ## Features
 
@@ -62,6 +62,12 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy, Tailoring, Leathe
 |-------|----------|
 | Void Sphere | 48 hours |
 
+### Jewelcrafting
+
+| Craft | Cooldown |
+|-------|----------|
+| Brilliant Glass | 20 hours |
+
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/patrickwlarsen/primal-ledger/releases) page
@@ -75,12 +81,12 @@ A World of Warcraft TBC Anniversary addon that tracks Alchemy, Tailoring, Leathe
 
 - **Open the window**: Click the minimap button or type `/pl`
 - **Close the window**: Click the X button or press Escape
-- **Update cooldowns**: Open your profession window (Alchemy/Tailoring/Enchanting) to sync cooldown data
+- **Update cooldowns**: Open your profession window (Alchemy/Tailoring/Enchanting/Jewelcrafting) to sync cooldown data
 - **Quick craft**:
   - **Left-click** "Ready!" to open the profession window and select the recipe
   - **Right-click** "Ready!" to open the profession window
 - **Sources tab**:
-  - View where to obtain patterns/recipes for tailoring, leatherworking, alchemy, and enchanting cooldown crafts
+  - View where to obtain patterns/recipes for tailoring, leatherworking, alchemy, enchanting, and jewelcrafting cooldown crafts
   - **Shift-click** item links to paste them in chat
   - **Click vendor name** to target the NPC
   - **Click TomTom** to set a waypoint (requires TomTom addon)

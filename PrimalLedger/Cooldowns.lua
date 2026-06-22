@@ -29,6 +29,9 @@ PL.COOLDOWNS = {
 
     -- Enchanting cooldowns
     [28028] = { name = "Void Sphere", type = "voidSphere", duration = 172800 },                              -- 48 hours
+
+    -- Jewelcrafting cooldowns
+    [47280] = { name = "Brilliant Glass", type = "brilliantGlass", duration = 72000 },                       -- 20 hours
 }
 
 -- Profession names for detection
@@ -61,7 +64,8 @@ PL.PROFESSION_COOLDOWNS = {
     tailoring = { "shadowcloth", "primalMooncloth", "spellcloth" },
     leatherworking = { "saltShaker" },
     alchemy = { "primalMight", "transmuteUndeathToWater", "transmutePrimalManaToFire", "transmutePrimalShadowToWater", "transmutePrimalAirToFire", "transmutePrimalWaterToShadow", "transmutePrimalEarthToWater", "transmutePrimalWaterToAir", "transmutePrimalLifeToEarth", "transmuteEarthstormDiamond", "transmuteSkyfireDiamond" },
-    enchanting = { "voidSphere" }
+    enchanting = { "voidSphere" },
+    jewelcrafting = { "brilliantGlass" }
 }
 
 -- Friendly names for cooldown types
@@ -84,7 +88,9 @@ PL.COOLDOWN_NAMES = {
     transmuteEarthstormDiamond = "Transmute: Earthstorm Diamond",
     transmuteSkyfireDiamond = "Transmute: Skyfire Diamond",
 
-    voidSphere = "Void Sphere"
+    voidSphere = "Void Sphere",
+
+    brilliantGlass = "Brilliant Glass"
 }
 
 -- Spell IDs for each cooldown type (used to check if player knows the craft)
@@ -107,7 +113,9 @@ PL.COOLDOWN_SPELLS = {
     transmuteEarthstormDiamond = 32765,
     transmuteSkyfireDiamond = 32766,
 
-    voidSphere = 28028
+    voidSphere = 28028,
+
+    brilliantGlass = 47280
 }
 
 -- Cooldown durations
@@ -130,7 +138,9 @@ PL.COOLDOWN_DURATIONS = {
     transmuteEarthstormDiamond = 72000,
     transmuteSkyfireDiamond = 72000,
 
-    voidSphere = 172800 -- 48 hours
+    voidSphere = 172800, -- 48 hours
+
+    brilliantGlass = 72000 -- 20 hours
 }
 
 -- Source information for cooldown crafts
@@ -214,6 +224,13 @@ PL.COOLDOWN_SOURCES = {
         skillRequired = 350,
         trainer = true
     },
+
+    -- Jewelcrafting
+    brilliantGlass = {
+        spellId = 47280,
+        skillRequired = 375,
+        trainer = true
+    },
 }
 
 -- Profession spell names (for opening the tradeskill window)
@@ -221,7 +238,8 @@ PL.PROFESSION_SPELLS = {
     tailoring = "Tailoring",
     leatherworking = "Leatherworking",
     alchemy = "Alchemy",
-    enchanting = "Enchanting"
+    enchanting = "Enchanting",
+    jewelcrafting = "Jewelcrafting"
 }
 
 -- Map cooldown types to their profession
@@ -244,7 +262,9 @@ PL.COOLDOWN_TO_PROFESSION = {
     transmuteEarthstormDiamond = "alchemy",
     transmuteSkyfireDiamond = "alchemy",
 
-    voidSphere = "enchanting"
+    voidSphere = "enchanting",
+
+    brilliantGlass = "jewelcrafting"
 }
 
 -- Detect professions for a character (TBC Classic API)
@@ -483,6 +503,8 @@ function PL:ScanTradeSkillWindow(charKey)
         professionKey = "alchemy"
     elseif tradeskillName == "Tailoring" then
         professionKey = "tailoring"
+    elseif tradeskillName == "Jewelcrafting" then
+        professionKey = "jewelcrafting"
     else
         return -- Not a profession we track (Enchanting uses ScanCraftWindow)
     end
@@ -729,6 +751,21 @@ function PL:GetCharacterCooldowns(charKey)
         end
     end
 
+    -- Check jewelcrafting cooldowns
+    if hasProfession(charData.professions.jewelcrafting) then
+        for _, cdType in ipairs(self.PROFESSION_COOLDOWNS.jewelcrafting) do
+            if knownCrafts[cdType] and self:IsCooldownEnabled(cdType) then
+                local remaining = self:GetCooldownRemaining(charKey, cdType)
+                table.insert(cooldowns, {
+                    type = cdType,
+                    name = self.COOLDOWN_NAMES[cdType],
+                    remaining = remaining,
+                    formattedTime = self:FormatTimeRemaining(remaining)
+                })
+            end
+        end
+    end
+
     return cooldowns
 end
 
@@ -763,7 +800,7 @@ function PL:HasRelevantProfessions(charKey)
     local charData = self.db.characters[charKey]
     if not charData or not charData.professions then return false end
 
-    return hasProfession(charData.professions.tailoring) or hasProfession(charData.professions.leatherworking) or hasProfession(charData.professions.alchemy) or hasProfession(charData.professions.enchanting)
+    return hasProfession(charData.professions.tailoring) or hasProfession(charData.professions.leatherworking) or hasProfession(charData.professions.alchemy) or hasProfession(charData.professions.enchanting) or hasProfession(charData.professions.jewelcrafting)
 end
 
 -- Open profession window and select a specific recipe

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.16.0
+
+### New Features
+- **Jewelcrafting support** - Added tracking for the **Brilliant Glass** craft (20-hour cooldown). Detected automatically when the Jewelcrafting window is opened or the craft is cast, shown in the tracker and Cooldowns tab with the Jewelcrafting icon, toggleable in Settings, and listed in the Sources tab (learned from trainer, requires 375 skill).
+
 ## v1.15.0
 
 ### New Features

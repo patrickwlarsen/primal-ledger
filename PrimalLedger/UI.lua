@@ -769,6 +769,7 @@ function PL:UpdateMainFrame()
             { key = "leatherworking", name = "Leatherworking", items = { "saltShaker" } },
             { key = "alchemy", name = "Alchemy", items = { "primalMight", "transmutePrimalAirToFire", "transmutePrimalEarthToWater", "transmutePrimalWaterToAir", "transmutePrimalLifeToEarth", "transmuteEarthstormDiamond", "transmuteSkyfireDiamond" } },
             { key = "enchanting", name = "Enchanting", items = { "voidSphere" } },
+            { key = "jewelcrafting", name = "Jewelcrafting", items = { "brilliantGlass" } },
         }
 
         -- Initialize accordion state (all collapsed by default)
@@ -2249,6 +2250,7 @@ function PL:UpdateTrackingWindow()
 
     CreateSection("Tailoring", "tailoring")
     CreateSection("Alchemy", "alchemy")
+    CreateSection("Jewelcrafting", "jewelcrafting")
 
     content:SetHeight(math.abs(yOffset) + 10)
 end
